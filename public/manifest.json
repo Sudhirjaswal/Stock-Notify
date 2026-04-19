@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "StockSentry",
+  "version": "1.0.0",
+  "description": "Monitor product availability across e-commerce platforms and get notified when tracked items are back in stock.",
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Open StockSentry"
+  },
+  "permissions": [
+    "storage",
+    "alarms",
+    "notifications",
+    "activeTab",
+    "tabs"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": ["content.js"]
+    }
+  ]
+}
