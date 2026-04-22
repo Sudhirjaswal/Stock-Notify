@@ -4,7 +4,7 @@ import { Settings, Plus, Play, Pause, Trash2, ExternalLink, Activity, X, Smartph
 // ─── Toggle Switch helper ───────────────────────────────────────────────────
 function Toggle({ value, onChange }) {
   return (
-    <div onClick={onChange} className={`w-10 h-5 rounded-full transition-colors relative cursor-pointer ${value ? 'bg-cyan-500' : 'bg-slate-700'}`}>
+    <div onClick={onChange} className={`w-10 h-5 rounded-full transition-colors relative cursor-pointer ${value ? 'bg-blue-600' : 'bg-gray-300'}`}>
       <span className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${value ? 'translate-x-5' : ''}`} />
     </div>
   );
@@ -44,57 +44,70 @@ function SettingsPanel({ onClose }) {
   };
 
   return (
-    <div className="absolute inset-0 bg-slate-900 z-50 flex flex-col font-sans text-slate-200">
-      <header className="border-b border-slate-800 p-4 flex items-center justify-between bg-slate-950">
-        <h1 className="font-bold text-sm text-cyan-400">System Preferences</h1>
-        <button onClick={onClose} className="p-1.5 hover:bg-slate-800 rounded-lg transition-colors text-slate-400">
+    <div className="absolute inset-0 bg-white z-50 flex flex-col font-sans text-gray-900 border-l border-gray-200">
+      <header className="border-b border-gray-200 p-4 flex items-center justify-between bg-white text-gray-900">
+        <h1 className="font-semibold text-lg">Settings</h1>
+        <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-lg transition-colors text-gray-600">
           <X className="w-5 h-5" />
         </button>
       </header>
 
-      <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-6">
+      <div className="flex-1 overflow-y-auto p-5 flex flex-col gap-6 bg-gray-50">
         
         {/* Mobile Push via ntfy */}
-        <div className="flex flex-col gap-3 bg-slate-800/50 p-4 rounded-xl border border-slate-700">
-          <div className="flex items-center gap-2">
-            <Smartphone className="w-5 h-5 text-cyan-400" />
-            <h2 className="font-semibold text-sm text-slate-100">ntfy.sh Push</h2>
+        <div className="flex flex-col gap-3 bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+          <div className="flex items-center gap-2 border-b border-gray-100 pb-2">
+            <Smartphone className="w-5 h-5 text-blue-600" />
+            <h2 className="font-semibold text-base text-gray-900">Push Notifications (ntfy.sh)</h2>
           </div>
-          <input type="text" placeholder="Topic: e.g. mystocks-123" value={ntfyTopic} onChange={e => setNtfyTopic(e.target.value)}
-            className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all text-slate-100 placeholder-slate-500" />
-          <div className="flex items-center gap-3 mt-1">
+          <label className="text-sm font-medium text-gray-700 mt-1">Topic Name</label>
+          <input type="text" placeholder="e.g. mystocks-123" value={ntfyTopic} onChange={e => setNtfyTopic(e.target.value)}
+            className="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-gray-900" />
+          <div className="flex items-center gap-3 mt-2">
             <Toggle value={ntfyEnabled} onChange={() => setNtfyEnabled(!ntfyEnabled)} />
-            <span className="text-sm font-medium text-slate-300">Enable Mobile Push</span>
+            <span className="text-sm font-medium text-gray-700">Enable Mobile Push</span>
           </div>
         </div>
 
         {/* SMS via Twilio */}
-        <div className="flex flex-col gap-3 bg-slate-800/50 p-4 rounded-xl border border-slate-700">
-          <div className="flex items-center gap-2">
-            <Bell className="w-5 h-5 text-emerald-400" />
-            <h2 className="font-semibold text-sm text-slate-100">Twilio SMS</h2>
+        <div className="flex flex-col gap-3 bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+          <div className="flex items-center gap-2 border-b border-gray-100 pb-2">
+            <Bell className="w-5 h-5 text-green-600" />
+            <h2 className="font-semibold text-base text-gray-900">SMS Alerts (Twilio)</h2>
           </div>
-          <input type="text" placeholder="Account SID" value={twilioSid} onChange={e => setTwilioSid(e.target.value)}
-            className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all text-slate-100 placeholder-slate-500" />
-          <input type="password" placeholder="Auth Token" value={twilioToken} onChange={e => setTwilioToken(e.target.value)}
-            className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all text-slate-100 placeholder-slate-500" />
-          <div className="flex gap-2">
-            <input type="text" placeholder="From (+123)" value={twilioFrom} onChange={e => setTwilioFrom(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all text-slate-100 placeholder-slate-500" />
-            <input type="text" placeholder="To (+919)" value={twilioTo} onChange={e => setTwilioTo(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all text-slate-100 placeholder-slate-500" />
+          <div className="flex flex-col gap-2 mt-1">
+            <label className="text-sm font-medium text-gray-700">Account SID</label>
+            <input type="text" placeholder="Enter SID" value={twilioSid} onChange={e => setTwilioSid(e.target.value)}
+              className="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-gray-900" />
+            
+            <label className="text-sm font-medium text-gray-700 mt-1">Auth Token</label>
+            <input type="password" placeholder="Enter Token" value={twilioToken} onChange={e => setTwilioToken(e.target.value)}
+              className="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-gray-900" />
+            
+            <div className="grid grid-cols-2 gap-3 mt-1">
+              <div>
+                <label className="text-sm font-medium text-gray-700 block mb-1">From Number</label>
+                <input type="text" placeholder="+123" value={twilioFrom} onChange={e => setTwilioFrom(e.target.value)}
+                  className="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-gray-900" />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-gray-700 block mb-1">To Number</label>
+                <input type="text" placeholder="+919" value={twilioTo} onChange={e => setTwilioTo(e.target.value)}
+                  className="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-gray-900" />
+              </div>
+            </div>
           </div>
-          <div className="flex items-center gap-3 mt-1">
+          <div className="flex items-center gap-3 mt-3 border-t border-gray-100 pt-3">
             <Toggle value={smsEnabled} onChange={() => setSmsEnabled(!smsEnabled)} />
-            <span className="text-sm font-medium text-slate-300">Enable SMS Alerts</span>
+            <span className="text-sm font-medium text-gray-700">Enable SMS Alerts</span>
           </div>
         </div>
 
       </div>
       
-      <div className="p-4 border-t border-slate-800 bg-slate-950 flex items-center justify-between">
-        <span className="text-sm font-medium text-cyan-400">{status}</span>
-        <button onClick={saveSettings} className="bg-cyan-600 hover:bg-cyan-500 text-white shadow-[0_0_15px_rgba(6,182,212,0.4)] text-sm px-6 py-2.5 rounded-lg font-bold transition-all active:scale-95">
+      <div className="p-4 border-t border-gray-200 bg-white flex items-center justify-between">
+        <span className="text-sm font-medium text-green-600">{status}</span>
+        <button onClick={saveSettings} className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-6 py-2.5 rounded-lg font-semibold transition-all">
           Save Settings
         </button>
       </div>
@@ -175,46 +188,45 @@ export default function App() {
     }, 300);
   };
 
-  // High contrast vibrant UI configs
   const statusConfig = {
-    'in-stock':     { label: 'Available',     cls: 'text-emerald-400 bg-emerald-950/40 border border-emerald-500/30 shadow-[0_0_10px_rgba(52,211,153,0.15)]' },
-    'out-of-stock': { label: 'Out of Stock',  cls: 'text-rose-400 bg-rose-950/40 border border-rose-500/30' },
-    'pending':      { label: 'Scanning...',   cls: 'text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 animate-pulse' },
-    'unknown':      { label: 'Verify Link',   cls: 'text-amber-400 bg-amber-950/40 border border-amber-500/30' },
+    'in-stock':     { label: 'In Stock',     cls: 'text-green-800 bg-green-100' },
+    'out-of-stock': { label: 'Out of Stock', cls: 'text-red-800 bg-red-100' },
+    'pending':      { label: 'Checking...',  cls: 'text-blue-800 bg-blue-100 animate-pulse' },
+    'unknown':      { label: 'Error',        cls: 'text-yellow-800 bg-yellow-100' },
   };
 
   return (
-    <div className="flex flex-col h-full relative font-sans text-slate-200 bg-slate-900 selection:bg-cyan-500/30">
+    <div className="flex flex-col h-full relative font-sans bg-gray-50 text-gray-900">
       {showSettings && <SettingsPanel onClose={() => setShowSettings(false)} />}
 
       {/* Header */}
-      <header className="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-950/80 backdrop-blur-md sticky top-0 z-10 shadow-lg">
-        <div className="flex items-center gap-2.5">
-          <div className="p-1.5 bg-cyan-500/10 rounded-lg">
-            <Activity className="w-5 h-5 text-cyan-400" />
+      <header className="p-4 border-b border-gray-200 flex items-center justify-between bg-white shadow-sm z-10">
+        <div className="flex items-center gap-3">
+          <div className="p-1.5 border border-gray-200 bg-gray-50 rounded shadow-sm">
+            <Activity className="w-5 h-5 text-blue-600" />
           </div>
-          <h1 className="font-bold text-base tracking-wide text-white">StockSentry</h1>
+          <h1 className="font-bold text-xl text-gray-900 tracking-tight">StockSentry</h1>
         </div>
-        <button onClick={() => setShowSettings(true)} className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors" title="Settings">
+        <button onClick={() => setShowSettings(true)} className="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors border border-transparent hover:border-gray-200" title="Settings">
           <Settings className="w-5 h-5" />
         </button>
       </header>
 
-      <main className="flex-1 overflow-y-auto p-4 flex flex-col gap-6">
+      <main className="flex-1 overflow-y-auto p-4 flex flex-col gap-5">
 
-        {/* Input */}
+        {/* Input Form */}
         <form onSubmit={addProduct} className="flex flex-col gap-2">
           <div className="flex gap-2 relative">
             <input
               type="url"
-              placeholder="Paste product link to track..."
+              placeholder="Paste product link here..."
               value={newUrl}
               onChange={(e) => setNewUrl(e.target.value)}
-              className="flex-1 bg-slate-950 border border-slate-700/80 rounded-xl pl-4 pr-12 py-3 text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all text-slate-100 placeholder-slate-500 shadow-inner"
+              className="flex-1 bg-white border border-gray-300 rounded-lg pl-4 pr-12 py-3 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all text-gray-900 placeholder-gray-400 shadow-sm"
               required
             />
-            <button type="submit" className="absolute right-2 top-2 p-1.5 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg transition-all shadow-[0_0_10px_rgba(6,182,212,0.3)] hover:shadow-[0_0_15px_rgba(6,182,212,0.5)] active:scale-95 group">
-              <Plus className="w-4 h-4 transition-transform group-hover:rotate-90 text-white" />
+            <button type="submit" className="absolute right-2 top-2 p-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors shadow-sm">
+              <Plus className="w-4 h-4 text-white" />
             </button>
           </div>
         </form>
@@ -222,44 +234,44 @@ export default function App() {
         {/* Watchlist */}
         <div className="flex flex-col gap-3">
           {products.length === 0 ? (
-            <div className="text-center text-slate-500 py-16 flex flex-col items-center gap-3 bg-slate-800/30 rounded-2xl border border-slate-800 border-dashed">
-              <Activity className="w-8 h-8 opacity-40 text-cyan-500" />
-              <p className="text-sm font-medium">Radar is empty.<br/><span className="text-slate-600 font-normal">Add a link to begin scanning.</span></p>
+            <div className="text-center text-gray-500 py-12 flex flex-col items-center gap-3 bg-white rounded-xl border border-gray-200 shadow-sm">
+              <Activity className="w-8 h-8 text-gray-300" />
+              <p className="text-sm font-medium">No items tracked yet.<br/><span className="text-gray-400 font-normal">Add a URL above to start checking stock.</span></p>
             </div>
           ) : (
             products.map((product) => {
               const s = statusConfig[product.status] || statusConfig['unknown'];
               return (
-                <div key={product.id} className={`group relative bg-slate-800/80 border rounded-xl p-4 transition-all flex flex-col gap-3 shadow-lg ${!product.active ? 'opacity-40 border-dashed border-slate-700 backdrop-blur-none' : 'border-slate-700 hover:border-cyan-500/50 backdrop-blur-sm'}`}>
+                <div key={product.id} className={`group bg-white border border-gray-200 rounded-xl p-4 flex flex-col gap-3 shadow-sm hover:shadow-md transition-shadow ${!product.active ? 'opacity-60 bg-gray-50' : ''}`}>
                   
                   <div className="flex justify-between items-start gap-4">
                     <div className="flex-1 min-w-0">
-                      <a href={product.url} target="_blank" rel="noreferrer" className="font-bold text-sm text-slate-100 truncate hover:text-cyan-400 flex items-center gap-1.5 transition-colors">
+                      <a href={product.url} target="_blank" rel="noreferrer" className="font-semibold text-base text-gray-900 truncate hover:text-blue-600 flex items-center gap-1.5 transition-colors">
                         {product.name}
-                        <ExternalLink className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <ExternalLink className="w-4 h-4 text-gray-400" />
                       </a>
-                      <div className="flex items-center gap-2 mt-1.5">
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest bg-slate-900 px-2 py-0.5 rounded-full">{product.site}</span>
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">{product.site}</span>
                       </div>
                     </div>
-                    <span className={`inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest shrink-0 ${s.cls}`}>
+                    <span className={`inline-flex items-center px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wide shrink-0 ${s.cls}`}>
                       {s.label}
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between pt-3 border-t border-slate-700/50">
-                    <span className="text-[11px] font-medium text-slate-500">Last scanned: {product.lastChecked}</span>
-                    <div className="flex items-center gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                  <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                    <span className="text-xs font-medium text-gray-500">Checked: {product.lastChecked}</span>
+                    <div className="flex items-center gap-1.5">
                       
-                      <button onClick={() => simulateRestock(product.id)} className="p-1.5 text-slate-400 hover:text-amber-400 hover:bg-slate-900 rounded-lg flex items-center justify-center transition-colors border border-transparent hover:border-amber-500/30" title="Simulate Restock Trigger">
+                      <button onClick={() => simulateRestock(product.id)} className="p-1.5 text-gray-500 hover:text-yellow-600 hover:bg-yellow-50 rounded-md transition-colors" title="Simulate Restock Notification">
                         <Zap className="w-4 h-4" />
                       </button>
                       
-                      <button onClick={() => toggleActive(product.id)} className="p-1.5 text-slate-400 hover:text-cyan-400 hover:bg-slate-900 rounded-lg flex items-center justify-center transition-colors border border-transparent hover:border-cyan-500/30" title={product.active ? 'Pause Radar' : 'Resume Radar'}>
+                      <button onClick={() => toggleActive(product.id)} className="p-1.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors" title={product.active ? 'Pause Tracking' : 'Resume Tracking'}>
                         {product.active ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
                       </button>
                       
-                      <button onClick={() => removeProduct(product.id)} className="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-slate-900 rounded-lg flex items-center justify-center transition-colors border border-transparent hover:border-rose-500/30" title="Delete Entry">
+                      <button onClick={() => removeProduct(product.id)} className="p-1.5 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors" title="Delete Entry border border-transparent">
                         <Trash2 className="w-4 h-4" />
                       </button>
 
