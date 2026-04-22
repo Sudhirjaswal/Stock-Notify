@@ -44,6 +44,37 @@ async function sendNotification(title, message) {
   } catch (e) {
     console.error("StockSentry: ntfy push error", e);
   }
+
+  // 3. Mobile SMS via Twilio
+  try {
+    const twilioSettings = await storageGet(['smsEnabled', 'twilioSid', 'twilioToken', 'twilioFrom', 'twilioTo']);
+    if (twilioSettings.smsEnabled && twilioSettings.twilioSid && twilioSettings.twilioToken && twilioSettings.twilioFrom && twilioSettings.twilioTo) {
+      console.log("StockSentry: Sending SMS via Twilio...");
+      const body = new URLSearchParams({
+        To: twilioSettings.twilioTo.trim(),
+        From: twilioSettings.twilioFrom.trim(),
+        Body: `StockSentry: ${title} - ${message}`
+      });
+      
+      const smsResponse = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${twilioSettings.twilioSid.trim()}/Messages.json`, {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Basic ' + btoa(`${twilioSettings.twilioSid.trim()}:${twilioSettings.twilioToken.trim()}`),
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: body.toString()
+      });
+      
+      if (smsResponse.ok) {
+        console.log("StockSentry: SMS sent successfully!");
+      } else {
+        const err = await smsResponse.json();
+        console.error("StockSentry: Twilio error", err);
+      }
+    }
+  } catch (e) {
+    console.error("StockSentry: Twilio SMS error", e);
+  }
 }
 
 // === CHECK A SINGLE PRODUCT via content script injection ===
