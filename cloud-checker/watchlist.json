@@ -4,17 +4,17 @@
     "name": "Sony PlayStation 5",
     "site": "amazon.in",
     "url": "https://www.amazon.in/Sony-PlayStation-5-Console/dp/B08FC5L3RG",
-    "active": false,
+    "active": true,
     "custom_selector": null,
-    "notes": "Set active to true to start monitoring"
+    "notes": "Monitoring active"
   },
   {
     "id": 2,
     "name": "Amul Protein Shake",
     "site": "shop.amul.com",
     "url": "https://shop.amul.com/en/product/amul-high-protein-plain-lassi-200-ml-or-pack-of-30",
-    "active": false,
+    "active": true,
     "custom_selector": null,
-    "notes": "Set active to true to start monitoring"
+    "notes": "Monitoring active"
   }
 ]
