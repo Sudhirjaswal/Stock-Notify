@@ -159,6 +159,16 @@ StockSentry integrates directly with the [Twilio API](https://www.twilio.com/) t
 
 > **Note:** StockSentry runs 100% locally. Your Twilio Auth Token is strictly saved to your local browser's `chrome.storage.local` and is never sent to any external server other than the official Twilio API.
 
+## 🧠 Architecture & Design Philosophy (Why Local?)
+
+You might be wondering: *"Why is this a Chrome Extension that only runs when my laptop is awake, instead of a 24/7 Cloud SaaS?"*
+
+Building this as a client-side extension was a deliberate architectural decision:
+1. **Zero Server Costs:** Running 24/7 web scrapers against Amazon or Apple on cloud servers like AWS or Heroku gets extremely expensive very quickly. 
+2. **Avoiding Anti-Bot Captchas:** E-commerce sites aggressively block cloud IP addresses. Browsers execute JavaScript and carry real user cookies, naturally bypassing most anti-bot protections without needing expensive proxy networks.
+3. **Privacy First:** By keeping everything locally in `chrome.storage.local`, your Twilio API keys and personal phone numbers never touch an external database.
+4. **The Goal:** This tool is designed to work as a silent productivity companion *while you are using your computer*, ensuring you don't miss a drop while you are distracted with work, rather than acting as a large-scale data aggregation server.
+
 ---
 
 ## 🎯 Custom CSS Selector (Advanced)
