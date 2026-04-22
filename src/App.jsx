@@ -44,25 +44,25 @@ function SettingsPanel({ onClose }) {
   };
 
   return (
-    <div className="absolute inset-0 bg-white z-50 flex flex-col font-sans text-gray-900 border-l border-gray-200">
-      <header className="border-b border-gray-200 p-4 flex items-center justify-between bg-white text-gray-900">
+    <div className="flex flex-col h-full bg-white z-50 animate-in fade-in slide-in-from-bottom-2 duration-200">
+      <header className="border-b border-gray-200 p-4 flex items-center justify-between bg-white text-gray-900 shrink-0">
         <h1 className="font-semibold text-lg">Settings</h1>
         <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-lg transition-colors text-gray-600">
           <X className="w-5 h-5" />
         </button>
       </header>
 
-      <div className="flex-1 overflow-y-auto p-3 flex flex-col gap-3 bg-gray-50">
+      <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 bg-gray-50">
         
         {/* Mobile Push via ntfy */}
-        <div className="flex flex-col gap-2 bg-white p-3 rounded-lg border border-gray-200 shadow-sm">
-          <div className="flex items-center gap-2 border-b border-gray-100 pb-1.5">
-            <Smartphone className="w-4 h-4 text-blue-600" />
+        <div className="flex flex-col gap-3 bg-white p-4 rounded-xl border border-gray-200 shadow-sm shrink-0">
+          <div className="flex items-center gap-2 border-b border-gray-100 pb-2">
+            <Smartphone className="w-5 h-5 text-blue-600" />
             <h2 className="font-semibold text-sm text-gray-900">Push Notifications (ntfy.sh)</h2>
           </div>
           <label className="text-xs font-medium text-gray-700">Topic Name</label>
           <input type="text" placeholder="e.g. mystocks-123" value={ntfyTopic} onChange={e => setNtfyTopic(e.target.value)}
-            className="w-full bg-white border border-gray-300 rounded-md px-2 py-1.5 text-xs focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-gray-900" />
+            className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-xs focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-gray-900" />
           <div className="flex items-center gap-2 mt-1">
             <Toggle value={ntfyEnabled} onChange={() => setNtfyEnabled(!ntfyEnabled)} />
             <span className="text-xs font-medium text-gray-700">Enable Mobile Push</span>
@@ -70,34 +70,34 @@ function SettingsPanel({ onClose }) {
         </div>
 
         {/* SMS via Twilio */}
-        <div className="flex flex-col gap-2 bg-white p-3 rounded-lg border border-gray-200 shadow-sm">
-          <div className="flex items-center gap-2 border-b border-gray-100 pb-1.5">
-            <Bell className="w-4 h-4 text-green-600" />
+        <div className="flex flex-col gap-3 bg-white p-4 rounded-xl border border-gray-200 shadow-sm shrink-0 mb-4">
+          <div className="flex items-center gap-2 border-b border-gray-100 pb-2">
+            <Bell className="w-5 h-5 text-green-600" />
             <h2 className="font-semibold text-sm text-gray-900">SMS Alerts (Twilio)</h2>
           </div>
-          <div className="flex flex-col gap-1.5 mt-1">
+          <div className="flex flex-col gap-2 mt-1">
             <label className="text-xs font-medium text-gray-700">Account SID</label>
             <input type="text" placeholder="Enter SID" value={twilioSid} onChange={e => setTwilioSid(e.target.value)}
-              className="w-full bg-white border border-gray-300 rounded-md px-2 py-1.5 text-xs focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-gray-900" />
+              className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-xs focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-gray-900" />
             
-            <label className="text-xs font-medium text-gray-700 mt-0.5">Auth Token</label>
+            <label className="text-xs font-medium text-gray-700">Auth Token</label>
             <input type="password" placeholder="Enter Token" value={twilioToken} onChange={e => setTwilioToken(e.target.value)}
-              className="w-full bg-white border border-gray-300 rounded-md px-2 py-1.5 text-xs focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-gray-900" />
+              className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-xs focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-gray-900" />
             
-            <div className="grid grid-cols-2 gap-2 mt-0.5">
+            <div className="grid grid-cols-2 gap-3 mt-1">
               <div>
-                <label className="text-xs font-medium text-gray-700 block mb-0.5">From Number</label>
+                <label className="text-xs font-medium text-gray-700 block mb-1">From Number</label>
                 <input type="text" placeholder="+123" value={twilioFrom} onChange={e => setTwilioFrom(e.target.value)}
-                  className="w-full bg-white border border-gray-300 rounded-md px-2 py-1.5 text-xs focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-gray-900" />
+                  className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-xs focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-gray-900" />
               </div>
               <div>
-                <label className="text-xs font-medium text-gray-700 block mb-0.5">To Number</label>
+                <label className="text-xs font-medium text-gray-700 block mb-1">To Number</label>
                 <input type="text" placeholder="+919" value={twilioTo} onChange={e => setTwilioTo(e.target.value)}
-                  className="w-full bg-white border border-gray-300 rounded-md px-2 py-1.5 text-xs focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-gray-900" />
+                  className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-xs focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-gray-900" />
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-2 mt-2 border-t border-gray-100 pt-2">
+          <div className="flex items-center gap-2 mt-1 border-t border-gray-100 pt-3">
             <Toggle value={smsEnabled} onChange={() => setSmsEnabled(!smsEnabled)} />
             <span className="text-xs font-medium text-gray-700">Enable SMS Alerts</span>
           </div>
@@ -105,9 +105,9 @@ function SettingsPanel({ onClose }) {
 
       </div>
       
-      <div className="p-3 border-t border-gray-200 bg-white flex items-center justify-between">
+      <div className="p-4 border-t border-gray-200 bg-white flex items-center justify-between shrink-0">
         <span className="text-xs font-medium text-green-600">{status}</span>
-        <button onClick={saveSettings} className="bg-blue-600 hover:bg-blue-700 text-white text-xs px-5 py-2 rounded-md font-semibold transition-all">
+        <button onClick={saveSettings} className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-6 py-2 rounded-md font-semibold transition-all">
           Save Settings
         </button>
       </div>
@@ -196,10 +196,12 @@ export default function App() {
   };
 
   return (
-    <div className="flex flex-col h-full relative font-sans bg-gray-50 text-gray-900">
-      {showSettings && <SettingsPanel onClose={() => setShowSettings(false)} />}
-
-      {/* Header */}
+    <div className="w-[400px] h-[550px] flex flex-col relative font-sans bg-gray-50 text-gray-900 border border-gray-200 overflow-hidden shadow-2xl">
+      {showSettings ? (
+        <SettingsPanel onClose={() => setShowSettings(false)} />
+      ) : (
+        <>
+          {/* Header */}
       <header className="p-4 border-b border-gray-200 flex items-center justify-between bg-white shadow-sm z-10">
         <div className="flex items-center gap-3">
           <div className="p-1.5 border border-gray-200 bg-gray-50 rounded shadow-sm">
@@ -283,6 +285,8 @@ export default function App() {
           )}
         </div>
       </main>
+        </>
+      )}
     </div>
   );
 }
