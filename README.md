@@ -147,6 +147,20 @@ Free mobile push notifications — no account, no subscription.
 
 ---
 
+## 🔔 SMS Alerts Setup (Twilio)
+
+StockSentry integrates directly with the [Twilio API](https://www.twilio.com/) to send literal SMS messages to your phone without exposing any keys to a backend server. 
+
+1. Create a free Twilio account to get your **Account SID** and **Auth Token**.
+2. Claim a free Twilio Phone Number.
+3. Open the StockSentry **Settings** ⚙️ and enter your credentials.
+4. Add your personal phone number to the "To" field (ensure it is verified in Twilio if using a trial account).
+5. Toggle **Enable** → Save → **Test SMS**.
+
+> **Note:** StockSentry runs 100% locally. Your Twilio Auth Token is strictly saved to your local browser's `chrome.storage.local` and is never sent to any external server other than the official Twilio API.
+
+---
+
 ## 🎯 Custom CSS Selector (Advanced)
 
 For sites where automatic detection doesn't work precisely:
